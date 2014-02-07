@@ -18,3 +18,6 @@ csa_diagrams/
 
 #ignore synopsis files from documentation directory
 project_docs/
+
+#ignore npm logging
+npm-debug.log
