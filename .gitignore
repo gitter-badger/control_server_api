@@ -21,3 +21,7 @@ project_docs/
 
 #ignore npm logging
 npm-debug.log
+
+#ignore node.js environments dependency setup files
+share/
+src/
