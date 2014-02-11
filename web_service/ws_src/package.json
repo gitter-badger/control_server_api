@@ -1,8 +1,20 @@
 {
-    "name"         : "control server api",
-    "version"      : "0.0.1",
-    "private"      : true,
-    "dependencies" : {
-        "connect" : "2.12.x"
-    }
+    "name"                : "control_server_api",
+    "version"             : "0.0.2",
+    "author"              : "rihbyne rihen234@gmail.com",
+    "private"             : true,
+    "description"         : "This is a web application which interfaces 
+                             with raspberryPi GPIO terminal and exposes RESTful web service.
+                             The GPIO parameters can be controlled in real time by leveraging 
+                             web sockets.",
+    "repository"          : {},
+    "keywords"            : [],
+    "license"             : "",    
+    "dependencies"        : {
+        "connect" : "2.12.x",
+        "express" : "3.4.x"
+    },
+    "devDependencies"     : {},
+    "bundledDependencies" : [],
+    "engines" : {}
 }   
