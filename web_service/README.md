@@ -1,0 +1,2 @@
+This part of the project is written in node.js which is server-side javascript asynchronous programming language.The code here interfaces with raspberryPi GPIO terminal and controls/regulates parameters of connected systems.
+This module leverages websocket technology which is still under research and yet to be finalized by IETF.The use of websockets here will establish bi-directional communication between end clients and server which enables real-time communication.
