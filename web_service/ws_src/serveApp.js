@@ -1,5 +1,5 @@
-/* 
- * serveApp.js - Hello World
+/*
+ * serveApp.js - Hello World using Express
 */
 
 /* jslint   node  : true , continue : true,
@@ -8,19 +8,38 @@
     regexp        : true , sloppy   : true, vars     : false
 */
 
-/* global variables declaration */
+// -------------------module level scope variables------------------------
+'use strict';
 
 var
+    connectInstance,serveApp,
     http = require( 'http' ),
-    response_text = "Hello world";
+    express = require( 'express' ),
 
+    app = express(),
+    reply_text = "Hello world",
+    serveApp = http.createServer(app);
+//--------------------end module scope variables--------------------------
 
+//--------------------server configuration--------------------------------
+app.configure( function() {
+    app.use( express.logger() );
+    app.use( express.bodyParser() );
+    app.use( express.methodOverride() );
+  });
 
-serveApp = http.createServer( function  (req,res) {
+app.get( '/',function  (req,res) {
     //a simple http server
+    res.setHeader( 'Content-length', reply_text.length );
     res.writeHead(200 ,{ 'Content-type' : 'text/plain' });
-    console.log(req.url);
-    res.end("hello world");
-}).listen(3030);
+    res.end( reply_text );
+    if (reply_text.length) {
+      //calculate and randamize string
+      console.log("length : " + " " + reply_text.length);
+    }
+  });
+//--------------------end server configuration-----------------------------
 
-console.log("server listening on port %d",serveApp.address().port);
+serveApp.listen( 3030 );
+
+console.log( "server listening on port %d",serveApp.address().port );
