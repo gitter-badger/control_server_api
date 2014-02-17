@@ -25,3 +25,7 @@ npm-debug.log
 #ignore node.js environments dependency setup files
 share/
 src/
+
+#ignore node_modules
+web_service/node_modules/
+
