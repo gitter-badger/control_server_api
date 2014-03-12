@@ -12,21 +12,16 @@
 'use strict';
 
 var
-    connectInstance,serveApp,
     http = require( 'http' ),
-    express = require( 'express' ),
-
-    app = express(),
+    appConfig = require( './config/node-express' ),
+    app = appConfig.loadApp,
     reply_text = "Hello world",
     serveApp = http.createServer(app);
 //--------------------end module scope variables--------------------------
 
 //--------------------server configuration--------------------------------
-app.configure( function() {
-    app.use( express.logger() );
-    app.use( express.bodyParser() );
-    app.use( express.methodOverride() );
-  });
+
+appConfig.set_mode('development');
 
 app.get( '/',function  (req,res) {
     //a simple http server
@@ -36,6 +31,7 @@ app.get( '/',function  (req,res) {
     if (reply_text.length) {
       //calculate and randamize string
       console.log("length : " + " " + reply_text.length);
+      //console.log(process.env.NODE_ENV);
     }
   });
 //--------------------end server configuration-----------------------------
