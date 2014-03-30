@@ -29,6 +29,9 @@ module.exports = ( function  () {
         app.configure( function  () {
             app.use( express.bodyParser() );
             app.use( express.methodOverride() );
+            app.use( express.json() );
+            app.use( express.urlencoded() );
+            app.use( app.router );
           });
 
         if (mode === "development") {
@@ -43,7 +46,8 @@ module.exports = ( function  () {
 
         if (mode === "production") {
           app.configure( 'production',function  () {
-            app.use( express.errorHandler() );
+            app.use( express.logger('dev') );
+            app.use( express.errorHandler({ }) );
           });
         }
       };
