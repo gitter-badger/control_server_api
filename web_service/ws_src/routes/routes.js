@@ -10,8 +10,9 @@
 
 //-------define module scope variables----------------
 'use strict';
-var serviceGreeter = "Welcome! This is GPIO controller center." +
-                        "Begin commanding" +" the define API.";
+var serviceGreeter = "Welcome! This is GPIO control center." +
+                        "Begin commanding" +" the define API.",
+    gpioController = require('../libs/gpioController');
 
 //-------end module scope variable declaration--------
 
@@ -25,9 +26,28 @@ module.exports = function( app ) {
         if (serviceGreeter.length) {
             //calculate and randamize string
             console.log("length : " + " " + serviceGreeter.length);
-            console.log(process.env.NODE_ENV);
+            //console.log(process.env.NODE_ENV);
         }
     });
+
+    app.all('/gpio/*?', function(req, res, next) {
+       res.contentType( 'json' );
+       next();
+    });
+
+    app.get('/gpio/pinlist', function(req, res) {
+
+    });
+
+    app.get('/gpio/:pin_no([0-9]+)/:direction/:value', function(req, res) {
+       var
+           report = gpioController.triggerPin(req.params.pin_no,
+                                 req.params.direction.toString(),
+                                 req.params.value);
+        res.send(report);
+
+    });
+
 
 };
 

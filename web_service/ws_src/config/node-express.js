@@ -36,7 +36,7 @@ module.exports = ( function  () {
 
         if (mode === "development") {
           app.configure( 'development',function  () {
-            app.use( express.logger() );
+            app.use( express.logger('dev') );
             app.use( express.errorHandler({
                 dumpExceptions : true,
                 showStack      : true             
