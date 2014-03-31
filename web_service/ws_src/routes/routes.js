@@ -10,7 +10,8 @@
 
 //-------define module scope variables----------------
 'use strict';
-var reply_text = "Hello world";
+var serviceGreeter = "Welcome! This is GPIO controller center." +
+                        "Begin commanding" +" the define API.";
 
 //-------end module scope variable declaration--------
 
@@ -18,12 +19,12 @@ var reply_text = "Hello world";
 module.exports = function( app ) {
     app.get( '/',function  (req, res) {
         //a simple http server
-        res.setHeader( 'Content-length', reply_text.length );
+        res.setHeader( 'Content-length', serviceGreeter.length );
         res.writeHead(200 ,{ 'Content-type' : 'text/plain' });
-        res.end( reply_text );
-        if (reply_text.length) {
+        res.end( serviceGreeter );
+        if (serviceGreeter.length) {
             //calculate and randamize string
-            console.log("length : " + " " + reply_text.length);
+            console.log("length : " + " " + serviceGreeter.length);
             console.log(process.env.NODE_ENV);
         }
     });
