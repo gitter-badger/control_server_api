@@ -13,6 +13,7 @@
 var serviceGreeter = "Welcome! This is GPIO control center." +
                         "Begin commanding" +" the define API.",
     gpioController = require('../libs/gpioController');
+    //gpio = require('pi-gpio');
 
 //-------end module scope variable declaration--------
 
@@ -36,16 +37,32 @@ module.exports = function( app ) {
     });
 
     app.get('/gpio/pinlist', function(req, res) {
-
+            res.send({
+                pins: gpioController.pins
+            });
+        console.log("accessed pin list" + " "+ gpioController.pins);
     });
 
-    app.get('/gpio/:pin_no([0-9]+)/:direction/:value', function(req, res) {
-       var
-           report = gpioController.triggerPin(req.params.pin_no,
-                                 req.params.direction.toString(),
-                                 req.params.value);
-        res.send(report);
+    app.get('/gpio/:pin_no([0-9]+)/:direction((in|out))/:value((0|1))',
+        function(req, res) {
+            var pin = req.params.pin_no,
+                direction = req.params.direction,
+                value = req.params.value;
 
+            gpio.open(pin, direction, function(err){
+                 gpio.write(pin, value, function(){
+                     gpio.close(pin);
+                     var report = {
+                         message:"success",
+                         pin: pin,
+                         direction: direction,
+                         value: value
+                     };
+
+                     console.log(report);
+                     res.send(report);
+                 });
+            });
     });
 
 
