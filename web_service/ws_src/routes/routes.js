@@ -12,8 +12,8 @@
 'use strict';
 var serviceGreeter = "Welcome! This is GPIO control center." +
                         "Begin commanding" +" the define API.",
-    gpioController = require('../libs/gpioController');
-    //gpio = require('pi-gpio');
+    gpioController = require('../libs/gpioController'),
+    gpio = require('pi-gpio');
 
 //-------end module scope variable declaration--------
 
