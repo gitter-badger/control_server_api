@@ -62,7 +62,7 @@ module.exports = (function() {
             status = 1;
         }
        else {
-            message = "bad parameters:" + logBadParameters.pin + logBadParameters.direction + logBadParameters.value;
+            message = "bad parameters:" + (logBadParameters.pin || logBadParameters.direction || logBadParameters.value);
             status = 0;
             return {message: message, status: "invalid"};
         }
@@ -74,7 +74,8 @@ module.exports = (function() {
 
    return {
         valid: validateParameters,
-        triggerPin: triggerPin
+        triggerPin: triggerPin,
+        pins: pinHolder
     };
 }());
 
