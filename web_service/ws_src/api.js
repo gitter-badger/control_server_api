@@ -75,7 +75,7 @@ module.exports = (function() {
             //report the result in object literal
             report = {
                 message: "success",
-                pin : pin_no,
+                pin : pin,
                 direction: direction,
                 state: value
             };
