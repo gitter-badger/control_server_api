@@ -65,6 +65,7 @@ module.exports = (function() {
 
     triggerPin = function(pin, direction, value) {
         if(validateParameters(pin, direction)) {
+
             // use gpio module and trigger the pin
             gpio.open(pin, direction, function(err){
                 gpio.write(pin, value, function(){
