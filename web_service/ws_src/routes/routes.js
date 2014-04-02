@@ -10,10 +10,9 @@
 
 //-------define module scope variables----------------
 'use strict';
-var serviceGreeter = "Welcome! This is GPIO control center." +
-                        "Begin commanding" +" the define API.",
-    gpioController = require('../libs/gpioController'),
-    gpio = require('pi-gpio');
+var
+    gpioController = require('.././api'),
+    pin,direction,value;
 
 //-------end module scope variable declaration--------
 
@@ -21,12 +20,12 @@ var serviceGreeter = "Welcome! This is GPIO control center." +
 module.exports = function( app ) {
     app.get( '/',function  (req, res) {
         //a simple http server
-        res.setHeader( 'Content-length', serviceGreeter.length );
+        res.setHeader( 'Content-length', gpioController.greet.length );
         res.writeHead(200 ,{ 'Content-type' : 'text/plain' });
-        res.end( serviceGreeter );
-        if (serviceGreeter.length) {
+        res.end( gpioController.greet );
+        if (gpioController.greet.length) {
             //calculate and randamize string
-            console.log("length : " + " " + serviceGreeter.length);
+            console.log("length : " + " " + gpioController.greet.length);
             //console.log(process.env.NODE_ENV);
         }
     });
@@ -38,21 +37,25 @@ module.exports = function( app ) {
 
     app.get('/gpio/pinlist', function(req, res) {
             res.send({
-                pins: gpioController.pins
+                pinlist: gpioController.pinlist
             });
-        console.log("accessed pin list" + " "+ gpioController.pins);
+        console.log("accessed pin list" + " "+ gpioController.pinHolder);
     });
 
-    app.get('/gpio/:pin_no([0-9]+)/:direction((in|out))/:value((0|1))',
+    app.get('/gpio/:pin_no([0-9]+)/:direction/:state((0|1))',
         function(req, res) {
-            var pin = req.params.pin_no,
+            var
+                pin = req.params.pin_no,
                 direction = req.params.direction,
-                value = req.params.value;
+                value = req.params.state,
+                result;
 
+            result = gpioController.triggerPin(pin, direction, value);
+/*
             gpio.open(pin, direction, function(err){
                  gpio.write(pin, value, function(){
                      gpio.close(pin);
-                     var report = {
+                     report = {
                          message:"success",
                          pin: pin,
                          direction: direction,
@@ -62,9 +65,10 @@ module.exports = function( app ) {
                      console.log(report);
                      res.send(report);
                  });
-            });
+            }); */
+            res.send(result);
+            console.log(result);
     });
-
 
 };
 
