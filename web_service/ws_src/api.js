@@ -47,7 +47,7 @@ module.exports = (function() {
             flagparameters = false;
         }
 
-        if(pinHolder.indexOf(pin_no) === -1){
+        if((pinHolder.indexOf(pin_no)+1) === -1){
             logBadParameters.push(pin_no);
             flagparameters = false;
         }
