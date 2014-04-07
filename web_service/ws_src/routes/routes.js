@@ -11,8 +11,7 @@
 //-------define module scope variables----------------
 'use strict';
 var
-    gpioController = require('.././api'),
-    pin,direction,value;
+    gpioController = require('.././api');
 
 //-------end module scope variable declaration--------
 
@@ -51,24 +50,24 @@ module.exports = function( app ) {
                 result;
 
             result = gpioController.triggerPin(pin, direction, value);
-/*
-            gpio.open(pin, direction, function(err){
-                 gpio.write(pin, value, function(){
-                     gpio.close(pin);
-                     report = {
-                         message:"success",
-                         pin: pin,
-                         direction: direction,
-                         value: value
-                     };
-
-                     console.log(report);
-                     res.send(report);
-                 });
-            }); */
             res.send(result);
             console.log(result);
     });
+
+/*
+    app.get('/gpio/:pin_no([0-9]+)/:direction/:state((0|1))',
+        function(req, res) {
+            var
+                pin = req.params.pin_no,
+                direction = req.params.direction,
+                value = req.params.state,
+                result;
+
+            result = gpioController.triggerPin(pin, direction, value);
+            res.send(result);
+            console.log(result);
+        });
+*/
 
 };
 

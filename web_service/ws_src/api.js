@@ -43,19 +43,15 @@ module.exports = (function() {
         var flagparameters = true;
 
         if(validProperties.pin_no.test(pin_no) === false){
+            logBadParameters.pop();
             logBadParameters.push(pin_no);
             flagparameters = false;
         }
-
-        if((pinHolder.indexOf(pin_no)+1) === -1){
-            logBadParameters.push(pin_no);
-            flagparameters = false;
-        }
-
 
         if(!((direction === validProperties.direction[0]) ||
             (direction === validProperties.direction[1])
             )) {
+            logBadParameters.pop();
             logBadParameters.push(direction);
             flagparameters = false;
         }
@@ -68,19 +64,27 @@ module.exports = (function() {
 
             // use gpio module and trigger the pin
             gpio.open(pin, direction, function(err){
-                gpio.write(pin, value, function(){
-                    gpio.close(pin);
-                });
+                if(err) {
+                    // report the error if it occurs
+                    report = {
+                      message: err
+                    };
+
+                }
+                else {
+                    gpio.write(pin, value, function(){
+                        gpio.close(pin);
+                    });
+
+                    //report the result in object literal
+                    report = {
+                        message: "success",
+                        pin : pin,
+                        direction: direction,
+                        state: value
+                    };
+                }
             });
-
-            //report the result in object literal
-            report = {
-                message: "success",
-                pin : pin,
-                direction: direction,
-                state: value
-            };
-
         }
         else {
             report = {
