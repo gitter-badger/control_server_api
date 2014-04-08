@@ -20,7 +20,7 @@ var
 
 //--------------------server configuration--------------------------------
 
-appConfig.set_mode('production');
+appConfig.set_mode('development');
 require('./routes/routes')(app);
 
 //--------------------end server configuration-----------------------------
