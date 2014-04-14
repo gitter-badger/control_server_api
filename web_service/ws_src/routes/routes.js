@@ -41,33 +41,31 @@ module.exports = function( app ) {
         console.log("accessed pin list" + " "+ gpioController.pinHolder);
     });
 
-    app.get('/gpio/:pin_no([0-9]+)/:direction/:state((0|1))',
+    app.get('/gpio/:pin_no([0-9]+)/:direction/1)',
         function(req, res) {
             var
                 pin = req.params.pin_no,
                 direction = req.params.direction,
-                value = req.params.state,
                 result;
 
-            result = gpioController.triggerPin(pin, direction, value);
+            result = gpioController.triggerPin(pin, direction, 1);
             res.send(result);
             console.log(result);
     });
 
-/*
-    app.get('/gpio/:pin_no([0-9]+)/:direction/:state((0|1))',
+
+    app.get('/gpio/:pin_no([0-9]+)/:direction/0)',
         function(req, res) {
             var
                 pin = req.params.pin_no,
                 direction = req.params.direction,
-                value = req.params.state,
                 result;
 
-            result = gpioController.triggerPin(pin, direction, value);
+            result = gpioController.triggerPin(pin, direction, 1);
             res.send(result);
             console.log(result);
         });
-*/
+
 
 };
 
