@@ -61,7 +61,7 @@ module.exports = function( app ) {
                 direction = req.params.direction,
                 result;
 
-            result = gpioController.triggerPin(pin, direction, 1);
+            result = gpioController.triggerPin(pin, direction, 0);
             res.send(result);
             console.log(result);
         });
