@@ -36,8 +36,7 @@ module.exports = (function() {
             pin23: 16,
             pin24: 18,
             pin25: 22
-        },
-        report; //variable used to fill in result of action performed
+        };
 
     validateParameters = function(pin_no, direction) {
         var flagparameters = true;
@@ -60,31 +59,35 @@ module.exports = (function() {
     };
 
     triggerPin = function(pin, direction, value) {
+        var
+            report = {}; // used to store operation status information
+
         if(validateParameters(pin, direction)) {
 
-            // use gpio module and trigger the pin
-            gpio.open(pin, direction, function(err){
-                if(err) {
-                    // report the error if it occurs
-                    report = {
-                      message: err
-                    };
+            try {
+                // use gpio module and trigger the pin
+                gpio.open(pin, direction, function(err){
 
-                }
-                else {
-                    gpio.write(pin, value, function(){
-                        gpio.close(pin);
-                    });
+                        gpio.write(pin, value, function(){
+                            gpio.close(pin);
+                        });
 
-                    //report the result in object literal
-                    report = {
-                        message: "success",
-                        pin : pin,
-                        direction: direction,
-                        state: value
-                    };
-                }
-            });
+                        //report the result in object literal
+                        report = {
+                            message: "success",
+                            pin : pin,
+                            direction: direction,
+                            state: value
+                        };
+                });
+            }
+            catch(e) {
+                report = {
+                    status: e.name,
+                    message: e.message
+                };
+            }
+
         }
         else {
             report = {
