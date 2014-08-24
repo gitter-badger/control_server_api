@@ -6,11 +6,11 @@ written on top of middleware framework and deployed on application server runnin
 embedded device. This is exposed as REST like web service and further integrated
 into a web app. The other part of this project used a voice recognition API to control
 GPIO of raspberry Pi.
-
+namit.agarwal92@yahoo.com
 program activity
 ----------------
-[!activity diagram](https://github.com/rihbyne/control_server_api/blob/master/activity_diagram.jpg)
+![activity diagram](https://github.com/rihbyne/control_server_api/blob/master/activity_diagram.jpg)
 
 data flow diagrams
 ----------------
-[!dfd](https://github.com/rihbyne/control_server_api/blob/master/dfd_level_0.jpg)[!dfd1](https://github.com/rihbyne/control_server_api/blob/master/dfd_level_1.jpg)[!dfd2](https://github.com/rihbyne/control_server_api/blob/master/dfd_level_2.jpg)
+![dfd](https://github.com/rihbyne/control_server_api/blob/master/dfd_level_0.jpg)![dfd1](https://github.com/rihbyne/control_server_api/blob/master/dfd_level_1.jpg)![dfd2](https://github.com/rihbyne/control_server_api/blob/master/dfd_level_2.jpg)
