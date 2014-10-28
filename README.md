@@ -1,5 +1,6 @@
 control_server_api:-
 =====================
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/rihbyne/control_server_api?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 This project implementation was inspired from Internet of Things (IoT)
 concept. It makes use of embedded system, Raspberry pi. The request routing logic is
 written on top of middleware framework and deployed on application server running on
